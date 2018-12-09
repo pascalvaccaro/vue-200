@@ -1,6 +1,7 @@
-var app = new Vue({
-  el: '#app',
+// eslint-disable-next-line no-undef
+new Vue({
+  el: "#app",
   data: {
-    name:"Cyril"    
+    name: "Cyril"
   }
-})
+});

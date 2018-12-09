@@ -1,15 +1,10 @@
 <template>
-  
+  <section class="container">Your content here</section>
 </template>
 
 <script>
-
-
-export default {
-  
-}
+export default {};
 </script>
 
 <style scoped>
-  
 </style>

@@ -1,43 +1,47 @@
 <template>
-    <section class="container">
-        <sfeir-form  v-bind:person="person" v-on:save="updatePerson" v-on:cancel="goBack"></sfeir-form>
-    </section>
+  <section class="container">
+    <sfeir-form 
+      :person="person" 
+      @save="updatePerson" 
+      @cancel="goBack"/>
+  </section>
 </template>
 <script>
-import router from './router.js'
-import peopleService from '../services/PeopleService.js'
-import Form from '../components/Form.vue'
+import router from "./router.js";
+import peopleService from "../services/PeopleService.js";
+import Form from "../components/Form.vue";
 
 export default {
-    name:'edit',
-    data (){
-        return {
-            person:{}
-        }
-    },
-    components:{
-        'sfeir-form': Form
-    },
-    beforeRouteEnter (route, redirect, next) {
-        peopleService
-        .fetchOne(route.params.id)
-        .then(person => next(vm => {
-            vm.person = person
-        }))
-        .catch(console.log.bind(console))
+  name: "Edit",
+  components: {
+    "sfeir-form": Form
   },
-  methods:{
-    updatePerson:function(p){
-        peopleService
-        .update(p)
-        .then(()=>{
-          this.goBack();
-        });
+  data() {
+    return {
+      person: {}
+    };
+  },
+  beforeRouteEnter(route, redirect, next) {
+    peopleService
+      .fetchOne(route.params.id)
+      .then(person =>
+        next(vm => {
+          vm.person = person;
+        })
+      )
+      .catch(console.log.bind(console));
+  },
+  methods: {
+    updatePerson: function(p) {
+      peopleService.update(p).then(() => {
+        this.goBack();
+      });
     },
-    goBack:function(){
-        router.go(-1);
+    goBack: function() {
+      router.go(-1);
     }
   }
-}
+};
 </script>
-<style scoped></style>
+<style scoped>
+</style>
