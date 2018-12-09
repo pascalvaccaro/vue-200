@@ -40,38 +40,19 @@ export default {
     "sfeir-form": Form,
     "search-bar": SearchBar
   },
-  data() {
-    return {
-      people: []
-    };
-  },
-  beforeRouteEnter(route, redirect, next) {
-    peopleService
-      .fetch()
-      .then(people =>
-        next(vm => {
-          vm._people = vm.people = people;
-        })
-      )
-      .catch(console.log.bind(console));
+  data: () => ({
+    people: []
+  }),
+  beforeRouteEnter(to, from, next) {
+    next(async vm => (vm.people = vm._people = await peopleService.fetch()));
   },
   methods: {
-    deletePerson: function(person) {
-      peopleService
-        .delete(person.id)
-        .then(people => {
-          this._people = this.people = people;
-        })
-        .catch(console.log);
+    async deletePerson(person) {
+      this.people = this._people = await peopleService.delete(person.id);
     },
-    addPerson: function(person) {
-      peopleService
-        .create(person)
-        .then(person => {
-          this._people.push(person);
-          this.hideDialog();
-        })
-        .catch(console.log);
+    async addPerson(person) {
+      this.people = this.people.concat(await peopleService.create(person));
+      this.hideDialog();
     },
     showDialog() {
       this.$refs["dialog"].open();

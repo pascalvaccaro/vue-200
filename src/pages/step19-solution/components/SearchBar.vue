@@ -24,7 +24,7 @@ export default {
     upper
   },
   computed: {
-    search: function() {
+    search() {
       return this.$store.state.search.toUpperCase();
     }
   },

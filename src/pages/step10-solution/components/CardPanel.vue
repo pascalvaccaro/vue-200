@@ -57,11 +57,12 @@
     </md-card>
   </div>
 </template>
+
 <script>
 export default {
   props: ["person"],
   methods: {
-    onDelete: function() {
+    onDelete() {
       this.$emit("delete", this.person);
     }
   }

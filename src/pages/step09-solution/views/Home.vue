@@ -19,23 +19,15 @@ export default {
   components: {
     "sfeir-card": CardPanel
   },
-  data() {
-    return {
-      person: {}
-    };
-  },
-  created: function() {
-    peopleService
-      .fetch()
-      .then(people => (this.person = people[0]))
-      .catch(console.log);
+  data: () => ({
+    person: {}
+  }),
+  beforeRouteEnter(to, from, next) {
+    next(async vm => ([vm.person] = await peopleService.fetch()));
   },
   methods: {
-    random: function() {
-      peopleService
-        .fetchRandom()
-        .then(person => (this.person = person))
-        .catch(console.log);
+    async random() {
+      this.person = await peopleService.fetchRandom();
     }
   }
 };

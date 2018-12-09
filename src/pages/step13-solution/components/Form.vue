@@ -66,24 +66,25 @@ export default {
   props: {
     person: {
       type: Object,
-      default: function() {
-        return {};
-      }
+      default: () => ({
+        firstname: "",
+        lastname: "",
+        email: "",
+        phone: ""
+      })
     }
   },
-  data() {
-    return {};
-  },
+  data: () => ({}),
   computed: {
-    editMode: function() {
+    editMode() {
       return this.person && this.person.id;
     }
   },
   methods: {
-    submit: function() {
+    submit() {
       this.$emit("save", this.person);
     },
-    cancel: function() {
+    cancel() {
       this.$emit("cancel");
     }
   }

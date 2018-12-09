@@ -38,16 +38,14 @@
 </template>
 <script>
 export default {
-  data() {
-    return {
-      person: {}
-    };
-  },
+  data: () => ({
+    person: {}
+  }),
   methods: {
-    submit: function() {
+    submit() {
       this.$emit("save", this.person);
     },
-    cancel: function() {
+    cancel() {
       this.$emit("cancel");
     }
   }

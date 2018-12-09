@@ -1,6 +1,5 @@
-const onInput = function(e) {
-  const el = e.target;
-  el.value = el.value.toUpperCase();
+const onInput = ({ target }) => {
+  target.value = target.value.toUpperCase();
 };
 
 export default {

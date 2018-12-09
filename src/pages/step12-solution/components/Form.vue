@@ -38,31 +38,32 @@
       <md-button @click="submit">Submit</md-button>
     </md-card-actions>
   </md-card>
-
 </template>
+
 <script>
 export default {
   props: {
     person: {
       type: Object,
-      default: function() {
-        return { firstname: "", lastname: "", email: "", phone: "" };
-      }
+      default: () => ({
+        firstname: "",
+        lastname: "",
+        email: "",
+        phone: ""
+      })
     }
   },
-  data() {
-    return {};
-  },
+  data: () => ({}),
   computed: {
-    editMode: function() {
+    editMode() {
       return this.person && this.person.id;
     }
   },
   methods: {
-    submit: function() {
+    submit() {
       this.$emit("save", this.person);
     },
-    cancel: function() {
+    cancel() {
       this.$emit("cancel");
     }
   }

@@ -60,13 +60,27 @@ export default {
   props: {
     person: {
       type: Object,
-      default: function() {
-        return { firstname: "", lastname: "", email: "", phone: "" };
-      }
+      default: () => ({
+        firstname: "",
+        lastname: "",
+        email: "",
+        phone: ""
+      })
     }
   },
-  data() {
-    return {};
+  data: () => ({}),
+  computed: {
+    editMode() {
+      return this.person && this.person.id;
+    }
+  },
+  methods: {
+    submit() {
+      this.$emit("save", this.person);
+    },
+    cancel() {
+      this.$emit("cancel");
+    }
   },
   validations: {
     person: {
@@ -82,19 +96,6 @@ export default {
         required,
         email
       }
-    }
-  },
-  computed: {
-    editMode: function() {
-      return this.person && this.person.id;
-    }
-  },
-  methods: {
-    submit: function() {
-      this.$emit("save", this.person);
-    },
-    cancel: function() {
-      this.$emit("cancel");
     }
   }
 };

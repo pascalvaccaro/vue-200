@@ -61,13 +61,11 @@
 import PEOPLE from "../_static/people.js";
 
 export default {
-  data() {
-    return {
-      person: {}
-    };
-  },
-  created: function() {
-    this.person = PEOPLE[0];
+  data: () => ({
+    person: {}
+  }),
+  created() {
+    [this.person] = PEOPLE;
   }
 };
 </script>

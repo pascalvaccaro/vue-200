@@ -56,18 +56,19 @@
     </md-card>
   </div>
 </template>
+
 <script>
 export default {
   props: ["person"],
   computed: {
-    photoUrl: function() {
+    photoUrl() {
       return (
         this.person.photo || "https://randomuser.me/api/portraits/lego/6.jpg"
       );
     }
   },
   methods: {
-    onDelete: function() {
+    onDelete() {
       this.$emit("delete", this.person);
     }
   }

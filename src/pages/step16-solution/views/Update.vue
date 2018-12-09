@@ -16,28 +16,20 @@ export default {
   components: {
     "sfeir-form": Form
   },
-  data() {
-    return {
-      person: {}
-    };
-  },
+  data: () => ({
+    person: {}
+  }),
   beforeRouteEnter(route, redirect, next) {
-    peopleService
-      .fetchOne(route.params.id)
-      .then(person =>
-        next(vm => {
-          vm.person = person;
-        })
-      )
-      .catch(console.log.bind(console));
+    next(
+      async vm => (vm.person = await peopleService.fetchOne(route.params.id))
+    );
   },
   methods: {
-    updatePerson: function(p) {
-      peopleService.update(p).then(() => {
-        this.goBack();
-      });
+    async updatePerson(p) {
+      await peopleService.update(p);
+      this.goBack();
     },
-    goBack: function() {
+    goBack() {
       router.go(-1);
     }
   }

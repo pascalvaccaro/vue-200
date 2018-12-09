@@ -54,22 +54,14 @@ export default {
     this.$store.dispatch("fetch");
   },
   methods: {
-    deletePerson: function(person) {
-      peopleService
-        .delete(person.id)
-        .then(people => {
-          this._people = this.people = people;
-        })
-        .catch(console.log);
+    async deletePerson(person) {
+      this.people = this._people = await peopleService.delete(person.id);
     },
-    addPerson: function(person) {
-      peopleService
-        .create(person)
-        .then(person => {
-          this._people.push(person);
-          this.hideDialog();
-        })
-        .catch(console.log);
+    async addPerson(person) {
+      this.people = this._people = this._people.concat(
+        await peopleService.create(person)
+      );
+      this.hideDialog();
     },
     showDialog() {
       this.$refs["dialog"].open();

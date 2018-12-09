@@ -64,20 +64,11 @@
 import peopleService from "../services/PeopleService.js";
 
 export default {
-  data() {
-    return {
-      people: []
-    };
-  },
-  beforeRouteEnter(route, redirect, next) {
-    peopleService
-      .fetch()
-      .then(people =>
-        next(vm => {
-          vm.people = people;
-        })
-      )
-      .catch(console.log.bind(console));
+  data: () => ({
+    people: []
+  }),
+  beforeRouteEnter(to, from, next) {
+    next(async vm => ([vm.person] = await peopleService.fetch()));
   }
 };
 </script>

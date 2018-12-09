@@ -18,8 +18,8 @@ const getters = {
   filteredPeople: state => {
     return state.people.filter(item => {
       return (
-        item.firstname.toLowerCase().indexOf(state.search) != -1 ||
-        item.lastname.toLowerCase().indexOf(state.search) != -1
+        item.firstname.toUpperCase().indexOf(state.search) != -1 ||
+        item.lastname.toUpperCase().indexOf(state.search) != -1
       );
     });
   }
